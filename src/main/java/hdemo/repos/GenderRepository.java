@@ -1,4 +1,6 @@
-package hdemo;
+package hdemo.repos;
+
+import hdemo.entities.Gender;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

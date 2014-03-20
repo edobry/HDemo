@@ -1,4 +1,4 @@
-package hdemo;
+package hdemo.entities;
 
 import javax.persistence.*;
 

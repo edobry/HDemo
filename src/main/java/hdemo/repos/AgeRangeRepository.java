@@ -1,4 +1,6 @@
-package hdemo;
+package hdemo.repos;
+
+import hdemo.entities.AgeRange;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

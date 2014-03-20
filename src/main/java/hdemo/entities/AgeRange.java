@@ -1,4 +1,4 @@
-package hdemo;
+package hdemo.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,13 +6,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="publishers") 
-public class Publisher {
+@Table(name="age_ranges")
+public class AgeRange {
 	@Id @GeneratedValue
-	private long id;
-	String name;
+	public long id;
+	public String name;
 
-	protected Publisher(String name) {
+	private AgeRange() {}
+	protected AgeRange(String name) {
 		this.name = name;
 	}
 }
