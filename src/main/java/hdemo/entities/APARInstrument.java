@@ -3,6 +3,7 @@ package hdemo.entities;
 import javax.persistence.*;
 
 @Entity
+@Table(name="apar_instruments")
 public class APARInstrument {
 	@Id @GeneratedValue
     public long id;

@@ -1,23 +1,18 @@
 package hdemo.controllers;
 
-import java.util.Dictionary;
 import java.util.List;
 
 import hdemo.entities.APARInstrument;
-import hdemo.entities.AgeRange;
 import hdemo.repos.APARRepository;
-import hdemo.repos.AgeRangeRepository;
 import hdemo.services.APARService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
 @RequestMapping("/apar")
@@ -49,5 +44,12 @@ public class APARController extends RUDController<APARInstrument, APARRepository
 	@RequestMapping(method = RequestMethod.POST)
 	public APARInstrument createAPAR(@RequestBody APARInstrument apar){
 		return service.createAPAR(apar.publisher.name, apar.publication.name);
+	}
+	
+	//test
+	@ResponseBody
+	@RequestMapping(value = "test")
+	public Iterable<APARInstrument> test(){
+		return service.test();
 	}
 }

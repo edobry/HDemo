@@ -1,8 +1,11 @@
 package hdemo.services;
 
+import java.util.List;
+
 import hdemo.entities.APARInstrument;
 import hdemo.entities.Publication;
 import hdemo.entities.Publisher;
+import hdemo.entities.QAPARInstrument;
 import hdemo.repos.APARRepository;
 import hdemo.repos.PublicationRepository;
 import hdemo.repos.PublisherRepository;
@@ -24,5 +27,10 @@ public class APARService {
 		Publication publication = publRepo.save(new Publication(publ, publisher));
 		
 		return aparRepo.save(new APARInstrument(publisher, publication, publisher.name + "\\" + publication.name));
+	}
+	
+	public Iterable<APARInstrument> test(){
+		QAPARInstrument apar = QAPARInstrument.aPARInstrument;
+		return aparRepo.findAll(apar.publication.name.contains(" "));
 	}
 }

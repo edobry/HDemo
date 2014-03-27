@@ -13,7 +13,8 @@ public class ASARInstrument {
 
 	@OneToOne(targetEntity=AgeRange.class)
 	long AgeRangeId;
-	    
+
+    private ASARInstrument() {}
 	protected ASARInstrument(long GenderId, long AgeRangeId) {
 		this.GenderId = GenderId;
 		this.AgeRangeId = AgeRangeId;
