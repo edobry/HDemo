@@ -1,0 +1,68 @@
+<html>
+<head>
+	<title>HDemo Test</title>
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="node_modules/dustjs-linkedin/dist/dust-full.js"></script>
+</head>
+<body>
+	<h1>HDemo Test</h1>
+	<a href="#" id="btnQuery">Get Info</a>
+	<h2>Entities</h2>
+	<div id="entities">
+	</div>
+
+	<script type="text/html" id="entity_templ">
+		<div>{name}</div>
+	</script>
+	<script type="text/html" id="collection_templ">
+		{#.}{>entity/}{/.}
+	</script>
+	<script type="text/html" id="repo_templ">
+		<h2>{name}</h2>
+		{#data}{>collection/}{/data}
+	</script>
+
+	<script type="text/javascript">
+		var slice = Array.prototype.slice;
+		var partialRight = function () {
+			var func = arguments[0];
+			var args = slice.call(arguments, 1);
+
+			return function() {
+				// Invoke the originally-specified function, passing in all just-
+				// specified arguments, followed by any originally-specified arguments.
+				return func.apply(this, slice.call(arguments, 0).concat(args));
+			};
+		};
+
+		var endpoints = ["age", "gender", "apar", "pub", "publ"];
+
+		var registerTemplate = function (name) {
+			dust.loadSource(dust.compile($("#"+ name + "_templ").html(), name));
+		};
+
+		$(function(){
+			registerTemplate("entity");
+			registerTemplate("collection");
+			registerTemplate("repo");
+
+			var entityContainer = $("#entities");
+
+			var baseURL = "http://localhost:8080/";
+			$("#btnQuery").click(function() {
+				entityContainer.html("");
+				endpoints.map(function (elem, i){
+					$.ajax({
+						url: baseURL + elem,
+						"crossDomain": true
+					}).done(function (data) {
+						dust.render("repo", {"name": elem, "data": data}, function (err, out) {
+							entityContainer.append($(out));
+						});
+					});
+				});
+			});
+		});
+	</script>
+</body>
+</html>
